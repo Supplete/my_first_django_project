@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="fw-bold mb-4 text-center">📥 Admin Inbox</h2>
+
+    {% if messages_list %}
+    <div class="table-responsive">
+        <table class="table table-hover shadow">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for msg in messages_list %}
+                <tr class="{% if not msg.is_read %}table-warning{% endif %}">
+                    <td>{{ msg.name }}</td>
+                    <td>{{ msg.email }}</td>
+                    <td>{{ msg.message|truncatechars:50 }}</td>
+                    <td>{% if msg.is_read %}Read{% else %}Unread{% endif %}</td>
+                    <td>{{ msg.created_at|date:"Y-m-d H:i" }}</td>
+                    
+                    <td>
+    <a href="{% url 'reply_message' msg.pk %}" class="btn btn-primary btn-sm">Reply</a>
+    {% if not msg.is_read %}
+        <span class="badge bg-warning text-dark">Unread</span>
+    {% else %}
+        <span class="badge bg-success">Read</span>
+    {% endif %}
+    <a href="{% url 'delete_message' msg.pk %}" class="btn btn-danger btn-sm">Delete</a>
+</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="text-center">No messages yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

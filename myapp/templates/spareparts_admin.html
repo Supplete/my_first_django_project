@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="py-5 text-white" style="background: linear-gradient(135deg, #800000, #0f0f0f);">
+    <div class="container text-center">
+        <h1 class="display-5 fw-bold">Admin: Spare Parts</h1>
+        <p class="lead mt-3">Manage spare parts</p>
+        <a href="{% url 'add_sparepart' %}" class="btn btn-warning mt-3">Add New Spare Part</a>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            {% for part in spareparts %}
+            <div class="col-md-4">
+                <div class="card custom-card h-100 shadow-sm">
+                    <img src="{{ part.photo.url }}" class="card-img-top" alt="{{ part.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">{{ part.name }}</h5>
+                        <p class="card-text">
+                            Price: ${{ part.price }} <br>
+                            {% if part.in_stock %}
+                                <span class="badge bg-success">In Stock</span>
+                            {% else %}
+                                <span class="badge bg-danger">Out of Stock</span>
+                            {% endif %}
+                        </p>
+                        <div class="d-flex gap-2 mt-2">
+                            <a href="{% url 'edit_sparepart' part.id %}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{% url 'delete_sparepart' part.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">No spare parts available yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

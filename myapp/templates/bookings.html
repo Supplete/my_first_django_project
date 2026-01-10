@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="py-5 text-white" style="background: linear-gradient(135deg, #800000, #0f0f0f);">
+  <div class="container text-center">
+    <h1 class="display-5 fw-bold">Book a Service</h1>
+    <p class="lead mt-3">Fill out the form and upload your vehicle photo.</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+        <div class="card shadow-sm p-4">
+          <h3 class="fw-bold mb-4 text-center" style="color:#800000;">Service Booking Form</h3>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" class="form-control mb-3" name="customerName" placeholder="Full Name" required>
+            <input type="email" class="form-control mb-3" name="customerEmail" placeholder="Email" required>
+            <input type="text" class="form-control mb-3" name="customerPhone" placeholder="Phone Number" required>
+            <input type="text" class="form-control mb-3" name="customerLocation" placeholder="Location / Address" required>
+            <input type="text" class="form-control mb-3" name="vehicleMake" placeholder="Vehicle Make & Model" required>
+            <input type="text" class="form-control mb-3" name="vehicleReg" placeholder="Registration Number" required>
+            <input type="file" class="form-control mb-3" name="vehiclePhoto" accept="image/*" required>
+            <select class="form-select mb-3" name="serviceType" required>
+              <option selected disabled>Select Service</option>
+              <option>Diagnostics</option>
+              <option>Repairs</option>
+              <option>Spare Parts Replacement</option>
+              <option>Maintenance / Servicing</option>
+              <option>Car Detailing</option>
+              <option>Vehicle Inspection</option>
+            </select>
+            <input type="date" class="form-control mb-3" name="serviceDate" required>
+            <input type="time" class="form-control mb-3" name="serviceTime" required>
+            <div class="text-center">
+              <button type="submit" class="btn btn-warning btn-lg fw-bold px-5">Book Now</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

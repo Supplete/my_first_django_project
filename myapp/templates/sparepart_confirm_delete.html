@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="py-5">
+    <div class="container text-center">
+        <div class="card shadow-sm p-4">
+            <h3 class="mb-3">Confirm Delete</h3>
+            <p>Are you sure you want to delete <strong>{{ part.name }}</strong>?</p>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger me-2">Delete</button>
+                <a href="{% url 'spareparts_admin' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
