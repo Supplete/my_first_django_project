@@ -10,6 +10,8 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
+from django.core.paginator import Paginator
+from .models import Booking
 from reportlab.lib.pagesizes import A4
 from django.http import HttpResponseForbidden
 from django.contrib import messages as django_messages
@@ -183,12 +185,13 @@ def reply_message(request, pk):
 
             # optional: send email to user
             send_mail(
-                subject=f"Reply to your message: {contact_msg.subject or 'No Subject'}",
-                message=reply.reply,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[contact_msg.email],
-                fail_silently=True
-            )
+                  subject="Reply to your message",
+                  message=reply_text, # type: ignore
+                  from_email=settings.DEFAULT_FROM_EMAIL,
+                  recipient_list=[contact_msg.email],
+                  fail_silently=False,
+               )
+
 
             contact_msg.is_read = True
             contact_msg.save()
@@ -202,9 +205,7 @@ def reply_message(request, pk):
         'form': form,
         'contact_msg': contact_msg,
     })
-from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator
-from .models import Booking
+
 
 def customers_page(request):
     search_query = request.GET.get('search', '').strip()
@@ -259,3 +260,4 @@ def customer_bookings(request, customer_id):
         "bookings": bookings,
         "customer_name": customer_name
     })
+

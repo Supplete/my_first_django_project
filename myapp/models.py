@@ -24,6 +24,7 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.email}"
+    
 class MessageReply(models.Model):
     contact_message = models.ForeignKey(ContactMessage, on_delete=models.CASCADE, related_name='replies')
     admin = models.ForeignKey(User, on_delete=models.CASCADE)

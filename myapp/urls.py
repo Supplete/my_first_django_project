@@ -17,6 +17,7 @@ urlpatterns = [
     path('dashboard/inbox/delete/<int:pk>/', views.delete_message, name='delete_message'),
     path("customers/<int:customer_id>/bookings/", views.customer_bookings, name="customer_bookings"),
 
+
  # Admin spare parts CRUD
     path('dashboard/spareparts/', views.spareparts_admin, name='spareparts_admin'),
     path('dashboard/spareparts/add/', views.add_sparepart, name='add_sparepart'),
@@ -29,5 +30,5 @@ urlpatterns = [
 
 # Serve static & media files during development
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

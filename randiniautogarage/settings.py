@@ -66,6 +66,9 @@ TEMPLATES = [
         },
     },
 ]
+LOGIN_REDIRECT_URL = '/dashboard/spareparts/'
+LOGIN_URL = '/accounts/login/'
+
 
 WSGI_APPLICATION = 'randiniautogarage.wsgi.application'
 
@@ -132,6 +135,20 @@ STATIC_URL = 'static/'
 import os
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL='/media/'
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'randinigarage@gmail.com'
+EMAIL_HOST_PASSWORD = 'bkny horg tjkd qpoj'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

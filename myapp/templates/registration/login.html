@@ -1,0 +1,31 @@
+<!-- myapp/templates/registration/login.html -->
+
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Randini AutoGarage</title>
+ <link rel="stylesheet" href="{% static 'css/login.css' %}?v=2">
+
+</head>
+<body>
+  <div class="login-container">
+    <h2>Welcome Back</h2>
+    {% if form.errors %}
+      <p class="error-msg">Invalid username or password</p>
+    {% endif %}
+    <form method="post" class="login-form">
+      {% csrf_token %}
+      <label for="id_username">Username</label>
+      {{ form.username }}
+
+      <label for="id_password">Password</label>
+      {{ form.password }}
+
+      <button type="submit">Login</button>
+    </form>
+    <p class="footer-text">Forgot password? <a href="#">Click here</a></p>
+  </div>
+</body>
+</html>
